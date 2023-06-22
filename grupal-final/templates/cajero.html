@@ -2,9 +2,56 @@
 <html>
 <head>
     <title>Cajero Automático</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #cerrar-sesion {
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Bienvenido al cajero automático</h1>
-    <!-- Aquí se pueden agregar más elementos HTML para la interfaz gráfica del cajero automático -->
+    <div style="text-align: center;">
+        <button onclick="opcion1()">Ingreso</button>
+        <button onclick="opcion2()">Egreso</button>
+        <button onclick="opcion3()">Actualizar</button>
+        <button id="cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+    <script>
+        function opcion1() {
+            // Agregar código para la opción 1
+        }
+        function opcion2() {
+            // Agregar código para la opción 2
+        }
+        function opcion3() {
+            // Agregar código para la opción 3
+        }
+        function cerrarSesion() {
+            location.href = "http://127.0.0.1:5000";
+        }
+    </script>
 </body>
 </html>
