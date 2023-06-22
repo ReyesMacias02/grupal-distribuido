@@ -12,6 +12,13 @@
             color: #333;
             margin-top: 50px;
         }
+        .botones {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
         button {
             background-color: #333;
             color: #fff;
@@ -19,9 +26,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
+            margin: 10px;
+            font-size: 18px;
         }
         button:hover {
             background-color: #555;
@@ -29,29 +35,73 @@
         #cerrar-sesion {
             background-color: red;
         }
+        .codigo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .codigo input[type="password"] {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        .codigo button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .codigo button:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
     <h1>Bienvenido al cajero automático</h1>
-    <div style="text-align: center;">
+    <div class="botones">
         <button onclick="opcion1()">Ingreso</button>
         <button onclick="opcion2()">Egreso</button>
         <button onclick="opcion3()">Actualizar</button>
         <button id="cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
     </div>
+    <div class="codigo" style="display:none;">
+        <input type="password" placeholder="Ingrese su código de ingreso">
+        <button onclick="verificarCodigo()">Aceptar</button>
+        <button onclick="regresar()">Regresar</button>
+    </div>
     <script>
         function opcion1() {
-            // Agregar código para la opción 1
+            document.querySelector('.botones').style.display = 'none';
+            document.querySelector('.codigo').style.display = 'flex';
         }
-        function opcion2() {
-            // Agregar código para la opción 2
+        function verificarCodigo() {
+            var codigoIngreso = document.querySelector('.codigo input[type="password"]').value;
+            
+            // Verificar el código de ingreso
+            if (codigoIngreso === "1234") {
+                // Código correcto, redirigir a la página de ingreso
+                location.href = "ingreso.html";
+            } else {
+                // Código incorrecto, mostrar mensaje de error
+                alert("Código de ingreso incorrecto. Por favor, intente nuevamente.");
+            }
         }
-        function opcion3() {
-            // Agregar código para la opción 3
+        function regresar() {
+            document.querySelector('.botones').style.display = 'flex';
+            document.querySelector('.codigo').style.display = 'none';
         }
         function cerrarSesion() {
             location.href = "http://127.0.0.1:5000";
         }
+
+        // Resto de las funciones opcion2() y opcion3() aquí
+
     </script>
 </body>
 </html>
