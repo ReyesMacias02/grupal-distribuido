@@ -1,80 +1,16 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Cajero Automático</title>
-    <style>
-       body {
-            /* font-family: Arial, sans-serif; */
-            background-color: #f2f2f2;
-        }
-        h1 {
-            font-family: Baskerville, Baskerville Old Face, Garamond, Times New Roman, serif;
-            font-size: 60px;
-            text-align: center;
-            color: #333;
-            margin-top: 50px;
-        }
-        .botones {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        button {
-            margin: 10px;
-            font-family: Vegur, 'PT Sans', Verdana, sans-serif;
-            background-color: #333;
-            color: #fff;
-            padding: 15px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 26px;
-            display: flex;
-            align-items: center;
-        }
-        button:hover {
-            background-color: #555;
-        }
-        #cerrar-sesion {
-            background-color: #333;
-        }
-        .codigo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .codigo input[type="password"] {
-            padding: 10px;
-            font-size: 18px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-right: 10px;
-        }
-        .codigo button {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .codigo button:hover {
-            background-color: #555;
-        }
-    </style>
+    <title>Banca Web</title>
+    <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cajero.css') }}">
 </head>
-
 <body>
     <h1>Bienvenido al Cajero Automático</h1>
     <div class="botones">
-        <button onclick="opcion1()"><img src="{{ url_for('static', filename='image/ingreso.ico') }}"> Ingreso</button>
-        <button onclick="opcion2()"><img src="{{ url_for('static', filename='image/egreso.ico') }}"> Egreso</button>
-        <button onclick="opcion3()"><img src="{{ url_for('static', filename='image/editar.png') }}"> Actualizar</button>
+        <button onclick="ingresar()"><img src="{{ url_for('static', filename='image/ingreso.ico') }}"> Ingreso</button>
+        <button onclick="egreso()"><img src="{{ url_for('static', filename='image/egreso.ico') }}"> Egreso</button>
+        <button onclick="actualizar()"><img src="{{ url_for('static', filename='image/editar.png') }}"> Actualizar</button>
         <button id="cerrar-sesion" onclick="cerrarSesion()"><img
                 src="{{ url_for('static', filename='image/salir.ico') }}"> Cerrar sesión</button>
     </div>
@@ -84,7 +20,7 @@
         <button onclick="regresar()">Regresar</button>
     </div>
     <script>
-        function opcion1() {
+        function ingresar() {
             document.querySelector('.botones').style.display = 'none';
             document.querySelector('.codigo').style.display = 'flex';
         }
@@ -100,6 +36,19 @@
                 alert("Código de ingreso incorrecto. Por favor, intente nuevamente.");
             }
         }
+
+        function egreso() {
+            location.href = "http://127.0.0.1:5000/cajero/egreso";
+            
+        }
+
+        function actualizar(params) {
+            location.href = "http://127.0.0.1:5000/cajero/actualizar"
+            
+        }
+
+
+
         function regresar() {
             document.querySelector('.botones').style.display = 'flex';
             document.querySelector('.codigo').style.display = 'none';

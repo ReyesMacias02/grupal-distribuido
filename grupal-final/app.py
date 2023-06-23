@@ -16,7 +16,13 @@ def login():
 def cajero():
     return render_template('cajero.html')
 
+@app.route('/cajero/egreso')
+def egreso():
+    return render_template('egreso.html')
 
+@app.route('/cajero/actualizar')
+def actualizar():
+    return render_template('actualizar.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
