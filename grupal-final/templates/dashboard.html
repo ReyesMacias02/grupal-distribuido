@@ -4,7 +4,7 @@
 <head>
   <title>Banca Web</title>
   <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/egreso.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 
 <body>
@@ -12,7 +12,6 @@
     <h1>Sistema Bancario</h1>
     <nav>
       <ul>
-        <!-- <li><a href="#">Contactos</a></li> -->
         <li><a href="#">Perfil</a></li>
       </ul>
     </nav>
@@ -24,29 +23,29 @@
         </li>
         <li><a onclick="ingreso()"><img src="{{ url_for('static', filename='image/ingreso.ico') }}">Ingreso</a></li>
         <li><a onclick="egreso()"><img src="{{ url_for('static', filename='image/egreso.ico') }}">Egreso</a></li>
-        <li><a onclick="actualizar()"><img
-              src="{{ url_for('static', filename='image/actualizar.ico') }}">Actualización</a></li>
+        <li><a onclick="actualizar()"><img src="{{ url_for('static', filename='image/actualizar.ico') }}">Actualización</a></li>
         <li><a onclick="cerrarSesion()"><img src="{{ url_for('static', filename='image/salir.ico') }}">Cerrar sesión</a>
         </li>
       </ul>
     </div>
-    <div class="saldo">
-      <h2>Egreso de Saldos</h2>
-      <form>
 
-        <p>Saldo actual: 250</p>
-        
-        <label for="monto">Monto a egresar:</label>
-        <input type="text" id="monto" name="monto">
-        <input type="submit" value="Egresar">
-      </form>
+    <div class="table">
+      <h2>Movimiento de saldos</h2>
+      <table>
+        <tr>
+          <th>Fecha del movimiento</th>
+          <th>Acción</th>
+          <th>Saldo</th>
+        </tr>
+        <tr>
+          <td>23/06/2023</td>
+          <td>Ingreso</td>
+          <td>250</td>
+        </tr>
+      </table>
     </div>
 
   </div>
-  <div class="saldo_actual">
-    <p>Saldo actual</p>
-  </div>
-
   <script>
 
     function dashboard() {

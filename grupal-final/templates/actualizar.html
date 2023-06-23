@@ -1,12 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banca Web - Actualizar</title>
-    <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
+  <title>Banca Web</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/actualizar.css') }}">
 </head>
+
 <body>
-    hola
+  <header>
+    <h1>Sistema Bancario</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="menu">
+      <ul class="botones">
+        <li><a onclick="dashboard()"><img src="{{ url_for('static', filename='image/dashboard.ico') }}">Dashboard</a>
+        </li>
+        <li><a onclick="ingreso()"><img src="{{ url_for('static', filename='image/ingreso.ico') }}">Ingreso</a></li>
+        <li><a onclick="egreso()"><img src="{{ url_for('static', filename='image/egreso.ico') }}">Egreso</a></li>
+        <li><a onclick="actualizar()"><img
+              src="{{ url_for('static', filename='image/actualizar.ico') }}">Actualización</a></li>
+        <li><a onclick="cerrarSesion()"><img src="{{ url_for('static', filename='image/salir.ico') }}">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+    <div class="saldo">
+      <h2>Actualización del Saldo</h2>
+      <form>
+
+        <p>Saldo actual: 250</p>
+
+
+        <label for="monto">Monto a Actualizar:</label>
+        <input type="text" id="monto" name="monto">
+        <input type="submit" value="Actualizar">
+      </form>
+    </div>
+
+  </div>
+  <div class="saldo_actual">
+    <p>Saldo actual</p>
+  </div>
+
+  <script>
+
+    function dashboard() {
+      location.href = "http://127.0.0.1:5000/dashboard"
+    }
+
+    function ingreso(ingreso) {
+      location.href = "http://127.0.0.1:5000/ingreso"
+    }
+
+    function egreso(ingreso) {
+      location.href = "http://127.0.0.1:5000/egreso"
+    }
+
+    function actualizar(params) {
+      location.href = "http://127.0.0.1:5000/actualizar"
+    }
+
+    function cerrarSesion() {
+      location.href = "http://127.0.0.1:5000";
+    }
+  </script>
 </body>
+
 </html>
