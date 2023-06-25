@@ -5,6 +5,8 @@
   <title>Banca Web</title>
   <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/egreso.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
+
 </head>
 
 <body>
@@ -31,10 +33,42 @@
       </ul>
     </div>
     <div class="saldo">
+     
+      {% if message != 'null' %}
+      <div class="bs-toast toast fade show bg-primary position-fixed top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <iconify-icon class="text-white" icon="bx:bell"></iconify-icon>
+          <div class="me-auto fw-semibold text-white">Bootstrap</div>
+          <small class="text-white">11 mins ago</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body text-white">
+          {{ message }}
+        </div>
+      </div>
+    
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const toastElement = document.querySelector('.toast-placement-ex');
+          const toast = new bootstrap.Toast(toastElement);
+    
+          // Agregar evento de clic al botón de cerrar
+          const closeButton = toastElement.querySelector('.btn-close');
+          closeButton.addEventListener('click', function() {
+            toast.hide();
+          });
+    
+          toast.show();
+        });
+      </script>
+    {% endif %}
+    
+      
+      
       <h2>Egreso de Saldos</h2>
-      <form>
+      <form action="/egreso"  method="post">
 
-        <p>Saldo actual: 250</p>
+        <p>Saldo actual:${{ monto }}</p>
         
         <label for="monto">Monto a egresar:</label>
         <input type="text" id="monto" name="monto">
@@ -69,6 +103,25 @@
       location.href = "http://127.0.0.1:5000";
     }
   </script>
+    <!-- build:js assets/vendor/js/core.js -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="{{ url_for('static', filename='vendor/libs/jquery/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/libs/popper/popper.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+
+<script src="{{ url_for('static', filename='vendor/js/menu.js') }}"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+
+<!-- Main JS -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+<!-- Page JS -->
+<script src="{{ url_for('static', filename='js/ui-toasts.js') }}"></script>
+
 </body>
 
 </html>

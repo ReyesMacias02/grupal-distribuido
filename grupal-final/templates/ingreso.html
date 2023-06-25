@@ -27,12 +27,12 @@
     </div>
     <div class="saldo">
       <h2>Ingreso de Saldos</h2>
-      <form>
+      <form action="/ingreso"  method="post">
 
-        <p>Saldo actual: 250</p>
+        <p>Saldo actual:${{ monto }}</p>
 
         <label for="monto">Monto a ingresar:</label>
-        <input type="text" id="monto" name="monto">
+        <input type="number" id="monto" name="monto">
 
         <input type="submit" value="Ingresar">
       </form>
