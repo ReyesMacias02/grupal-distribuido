@@ -1,109 +1,80 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-  <title>Banca Web</title>
-  <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/egreso.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
 
-</head>
+{% block title %}Egresos - Sistema Bancario{% endblock %}
 
-<body>
-  <header>
-    <h1>Sistema Bancario</h1>
-    <nav>
-      <ul>
-        <!-- <li><a href="#">Contactos</a></li> -->
-        <li><a href="#">Perfil</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div class="container">
-    <div class="menu">
-      <ul class="botones">
-        <li><a onclick="dashboard()"><img src="{{ url_for('static', filename='image/dashboard.ico') }}">Dashboard</a>
-        </li>
-        <li><a onclick="ingreso()"><img src="{{ url_for('static', filename='image/ingreso.ico') }}">Ingreso</a></li>
-        <li><a onclick="egreso()"><img src="{{ url_for('static', filename='image/egreso.ico') }}">Egreso</a></li>
-        <li><a onclick="actualizar()"><img
-              src="{{ url_for('static', filename='image/actualizar.ico') }}">Actualización</a></li>
-        <li><a onclick="cerrarSesion()"><img src="{{ url_for('static', filename='image/salir.ico') }}">Cerrar sesión</a>
-        </li>
-      </ul>
-    </div>
-    <div class="saldo">
+{% block content %}
+<div class="saldo">
      
-      {% if message != 'null' %}
-      <div class="bs-toast toast fade show bg-primary position-fixed top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          <iconify-icon class="text-white" icon="bx:bell"></iconify-icon>
-          <div class="me-auto fw-semibold text-white">Bootstrap</div>
-          <small class="text-white">11 mins ago</small>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body text-white">
-          {{ message }}
-        </div>
-      </div>
-    
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const toastElement = document.querySelector('.toast-placement-ex');
-          const toast = new bootstrap.Toast(toastElement);
-    
-          // Agregar evento de clic al botón de cerrar
-          const closeButton = toastElement.querySelector('.btn-close');
-          closeButton.addEventListener('click', function() {
-            toast.hide();
-          });
-    
-          toast.show();
-        });
-      </script>
-    {% endif %}
-    
-      
-      
-      <h2>Egreso de Saldos</h2>
-      <form action="/egreso"  method="post">
-
-        <p>Saldo actual:${{ monto }}</p>
-        
-        <label for="monto">Monto a egresar:</label>
-        <input type="text" id="monto" name="monto">
-        <input type="submit" value="Egresar">
-      </form>
+  {% if message != 'null' %}
+  <div class="bs-toast toast fade show bg-primary position-fixed top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <iconify-icon class="text-white" icon="bx:bell"></iconify-icon>
+      <div class="me-auto fw-semibold text-white">Bootstrap</div>
+      <small class="text-white">11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-
-  </div>
-  <div class="saldo_actual">
-    <p>Saldo actual</p>
+    <div class="toast-body text-white">
+      {{ message }}
+    </div>
   </div>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toastElement = document.querySelector('.toast-placement-ex');
+      const toast = new bootstrap.Toast(toastElement);
 
-    function dashboard() {
-      location.href = "http://127.0.0.1:5000/dashboard"
-    }
+      // Agregar evento de clic al botón de cerrar
+      const closeButton = toastElement.querySelector('.btn-close');
+      closeButton.addEventListener('click', function() {
+        toast.hide();
+      });
 
-    function ingreso(ingreso) {
-      location.href = "http://127.0.0.1:5000/ingreso"
-    }
-
-    function egreso(ingreso) {
-      location.href = "http://127.0.0.1:5000/egreso"
-    }
-
-    function actualizar(params) {
-      location.href = "http://127.0.0.1:5000/actualizar"
-    }
-
-    function cerrarSesion() {
-      location.href = "http://127.0.0.1:5000";
-    }
+      toast.show();
+    });
   </script>
-    <!-- build:js assets/vendor/js/core.js -->
+{% endif %}
+
+  
+  
+  <h2>Egreso de Saldos</h2>
+  <form action="/egreso"  method="post">
+
+    <p>Saldo actual:${{ monto }}</p>
+    
+    <label for="monto">Monto a egresar:</label>
+    <input type="text" id="monto" name="monto">
+    <input type="submit" value="Egresar">
+  </form>
+</div>
+
+</div>
+<div class="saldo_actual">
+<p>Saldo actual</p>
+</div>
+<script>
+
+  function dashboard() {
+    location.href = "http://127.0.0.1:5000/dashboard"
+  }
+
+  function ingreso(ingreso) {
+    location.href = "http://127.0.0.1:5000/ingreso"
+  }
+
+  function egreso(ingreso) {
+    location.href = "http://127.0.0.1:5000/egreso"
+  }
+
+  function actualizar(params) {
+    location.href = "http://127.0.0.1:5000/actualizar"
+  }
+
+  function cerrarSesion() {
+    location.href = "http://127.0.0.1:5000";
+  }
+</script>
+  <!-- build:js assets/vendor/js/core.js -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="{{ url_for('static', filename='vendor/libs/jquery/jquery.js') }}"></script>
 <script src="{{ url_for('static', filename='vendor/libs/popper/popper.js') }}"></script>
@@ -121,7 +92,5 @@
 
 <!-- Page JS -->
 <script src="{{ url_for('static', filename='js/ui-toasts.js') }}"></script>
+{% endblock %}
 
-</body>
-
-</html>

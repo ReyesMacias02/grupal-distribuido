@@ -1,287 +1,255 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-  <title>Banca Web</title>
-  <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='js/dashboards-analytics.js') }}">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <style>
-    canvas {
-      max-width: 400px;
-    }
-  </style>
-</head>
+{% block title %}Dashboard - Sistema Bancario{% endblock %}
 
-<body>
-  <header>
-    <h1>Sistema Bancario</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Perfil</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div class="container">
-    <div class="menu">
-      <ul class="botones">
-        <li><a onclick="dashboard()"><img src="{{ url_for('static', filename='image/dashboard.ico') }}">Dashboard</a>
-        </li>
-        <li><a onclick="ingreso()"><img src="{{ url_for('static', filename='image/ingreso.ico') }}">Ingreso</a></li>
-        <li><a onclick="egreso()"><img src="{{ url_for('static', filename='image/egreso.ico') }}">Egreso</a></li>
-        <li><a onclick="actualizar()"><img src="{{ url_for('static', filename='image/actualizar.ico') }}">Actualización</a></li>
-        <li><a onclick= "window.location.href='{{ url_for('logout') }}'"><img src="{{ url_for('static', filename='image/salir.ico') }}">Cerrar sesión</a>
-        </li>
-      </ul>
+{% block content %}
+<div class="col-md-6 col-lg-4 order-1 mb-4">
+  <div class="card h-100">
+    <div class="card-header">
+  
     </div>
-  <!-- Expense Overview -->
-  <div class="col-md-6 col-lg-4 order-1 mb-4">
-    <div class="card h-100">
-      <div class="card-header">
-    
-      </div>
-      <div class="card-body px-0">
-        <div class="tab-content p-0">
-          <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-            <div class="d-flex p-4 pt-3">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="{{ url_for('static', filename='image/wallet.png') }}" alt="User" />
-              </div>
-              <div>
-                <small class="text-muted d-block">Balance Total</small>
-                <div class="d-flex align-items-center">
-                  <h6 class="mb-0 me-1">${{ monto }}</h6>
-                  <small class="text-success fw-semibold">
-                    <i class="bx bx-chevron-up"></i>
-                    42.9%
-                  </small>
-                </div>
+    <div class="card-body px-0">
+      <div class="tab-content p-0">
+        <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
+          <div class="d-flex p-4 pt-3">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="{{ url_for('static', filename='image/wallet.png') }}" alt="User" />
+            </div>
+            <div>
+              <small class="text-muted d-block">Balance Total</small>
+              <div class="d-flex align-items-center">
+                <h6 class="mb-0 me-1">${{ monto }}</h6>
+                <small class="text-success fw-semibold">
+                  <i class="bx bx-chevron-up"></i>
+                  42.9%
+                </small>
               </div>
             </div>
-            <div id="incomeChart"></div>
+          </div>
+          <div id="incomeChart"></div>
 
-            <div class="d-flex justify-content-center pt-4 gap-2">
-              <div class="flex-shrink-0">
-                <div id="expensesOfWeek"></div>
-              </div>
-              <div style="    margin: 10px;">
-                <p class="mb-n1 mt-1">Expenses This Week</p>
-                <small class="text-muted">$39 less than last week</small>
-              </div>
+          <div class="d-flex justify-content-center pt-4 gap-2">
+            <div class="flex-shrink-0">
+              <div id="expensesOfWeek"></div>
+            </div>
+            <div style="    margin: 10px;">
+              <p class="mb-n1 mt-1">Expenses This Week</p>
+              <small class="text-muted">$39 less than last week</small>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-    <div class="table">
-      <h2>Movimiento de saldos</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Fecha del movimiento</th>
-            <th>Acción</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in data %}
-          <tr>
-            <td>{{ item['date'] }}</td>
-            
-            <td>
-              {% if item['Type'] == 1 %}
-                Ingreso
-              {% elif item['Type'] == 2 %}
-                Egreso
-              {% endif %}
-            </td>
-      
-            <td>{{ item['mount'] }}</td>
+</div>
+  <div class="table">
+    <h2>Movimiento de saldos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha del movimiento</th>
+          <th>Acción</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+        <tr>
+          <td>{{ item['date'] }}</td>
+          
+          <td>
+            {% if item['Type'] == 1 %}
+              Ingreso
+            {% elif item['Type'] == 2 %}
+              Egreso
+            {% endif %}
+          </td>
+    
+          <td>{{ item['mount'] }}</td>
 
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
-    </div>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
   </div>
-  <script>
 
-    function dashboard() {
-      location.href = "http://127.0.0.1:5000/dashboard"
-    }
+</div>
+<script>
 
-    function ingreso(ingreso) {
-      location.href = "http://127.0.0.1:5000/ingreso"
-    }
+  function dashboard() {
+    location.href = "http://127.0.0.1:5000/dashboard"
+  }
 
-    function egreso(ingreso) {
-      location.href = "http://127.0.0.1:5000/egreso"
-    }
+  function ingreso(ingreso) {
+    location.href = "http://127.0.0.1:5000/ingreso"
+  }
 
-    function actualizar(params) {
-      location.href = "http://127.0.0.1:5000/actualizar"
-    }
+  function egreso(ingreso) {
+    location.href = "http://127.0.0.1:5000/egreso"
+  }
 
-    function cerrarSesion() {
-      location.href = "http://127.0.0.1:5000";
-    }
-  </script>
-   <script>
-    // Obtén el elemento canvas
-    const canvas = document.getElementById('lineChart');
-    // Crea un contexto de dibujo 2D
-    const ctx = canvas.getContext('2d');
-    // Define los datos del gráfico
-    const data = {
-      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-      datasets: [{
-        label: 'Ventas',
-        data: [12, 19, 3, 5, 2],
-        fill: false,
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
-    };
-    // Crea el gráfico de líneas
-    new Chart(ctx, {
-      type: 'line',
-      data: data,
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+  function actualizar(params) {
+    location.href = "http://127.0.0.1:5000/actualizar"
+  }
+
+  function cerrarSesion() {
+    location.href = "http://127.0.0.1:5000";
+  }
+</script>
+ <script>
+  // Obtén el elemento canvas
+  const canvas = document.getElementById('lineChart');
+  // Crea un contexto de dibujo 2D
+  const ctx = canvas.getContext('2d');
+  // Define los datos del gráfico
+  const data = {
+    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+    datasets: [{
+      label: 'Ventas',
+      data: [12, 19, 3, 5, 2],
+      fill: false,
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1
+    }]
+  };
+  // Crea el gráfico de líneas
+  new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
         }
       }
-    });
-  </script>
-  <script>
-      var options = {
-          series: [{
-            name: "Desktops",
-            data: [10, 91, 35, 51, 9, 62, 69, 91, 148]
-        }],
-          chart: {
-          height: 215,
-          type: 'area',
-          zoom: {
-            enabled: false
-          },
-          toolbar: {
-          show: false // Oculta la barra de herramientas con opciones de descarga
-        }
-        },
-        dataLabels: {
+    }
+  });
+</script>
+<script>
+    var options = {
+        series: [{
+          name: "Desktops",
+          data: [10, 91, 35, 51, 9, 62, 69, 91, 148]
+      }],
+        chart: {
+        height: 215,
+        type: 'area',
+        zoom: {
           enabled: false
         },
-        stroke: {
-          width: 2,
-        curve: 'smooth'
-        },
-      
-        
-        grid: {
-          row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          },
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-        },
-        yaxis: {
-        show: false ,// Oculta los valores del eje Y
-        
+        toolbar: {
+        show: false // Oculta la barra de herramientas con opciones de descarga
       }
-        };
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 2,
+      curve: 'smooth'
+      },
+    
+      
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        },
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      },
+      yaxis: {
+      show: false ,// Oculta los valores del eje Y
+      
+    }
+      };
 
 var chart = new ApexCharts(document.querySelector("#incomeChart"), options);
 
 chart.render();
 
-  </script>
-   <script>
-   var expensesOfWeek = [75];
+</script>
+ <script>
+ var expensesOfWeek = [75];
 
 var options = {
-  series: expensesOfWeek,
-  chart: {
-    width: 100,
-        height: 100,
-    type: 'radialBar',
-  },
-  plotOptions: {
-      radialBar: {
-          offsetY: 0,
-          startAngle: 0,
-          endAngle: 360,
-          strokeWidth: '8',
-          hollow: {
-            margin: 2,
-            size: '45%'
+series: expensesOfWeek,
+chart: {
+  width: 100,
+      height: 100,
+  type: 'radialBar',
+},
+plotOptions: {
+    radialBar: {
+        offsetY: 0,
+        startAngle: 0,
+        endAngle: 360,
+        strokeWidth: '8',
+        hollow: {
+          margin: 2,
+          size: '45%'
+        },
+        track: {
+          strokeWidth: '50%',
+          background: 'transparent'
+        },
+        dataLabels: {
+          show: true,
+          name: {
+            show: false
           },
-          track: {
-            strokeWidth: '50%',
-            background: 'transparent'
-          },
-          dataLabels: {
-            show: true,
-            name: {
-              show: false
+          value: {
+            formatter: function (val) {
+              return '$' + parseInt(val);
             },
-            value: {
-              formatter: function (val) {
-                return '$' + parseInt(val);
-              },
-              offsetY: 5,
-              color: '#697a8d',
-              fontSize: '13px',
-              show: true
-            }
+            offsetY: 5,
+            color: '#697a8d',
+            fontSize: '13px',
+            show: true
           }
         }
-  },
-  colors: ['#008FFB'],
-  labels: ['Gasto'],
-  legend: {
-    show: false,
-    floating: true,
-    fontSize: '1px',
-    position: 'left',
-    offsetX: 0,
-    offsetY: 10,
-    labels: {
-      useSeriesColors: true,
-    },
-    markers: {
-      size: 0
-    },
-    formatter: function (seriesName, opts) {
-      return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex] + " USD";
-    },
-    itemMargin: {
-      vertical: 3
-    }
-  },
-  responsive: [{
-    breakpoint: 480,
-    options: {
-      legend: {
-        show: false
       }
+},
+colors: ['#008FFB'],
+labels: ['Gasto'],
+legend: {
+  show: false,
+  floating: true,
+  fontSize: '1px',
+  position: 'left',
+  offsetX: 0,
+  offsetY: 10,
+  labels: {
+    useSeriesColors: true,
+  },
+  markers: {
+    size: 0
+  },
+  formatter: function (seriesName, opts) {
+    return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex] + " USD";
+  },
+  itemMargin: {
+    vertical: 3
+  }
+},
+responsive: [{
+  breakpoint: 480,
+  options: {
+    legend: {
+      show: false
     }
-  }]
+  }
+}]
 };
 
-    var chart = new ApexCharts(document.querySelector("#expensesOfWeek"), options);
-    chart.render();
-  </script>
-</body>
+  var chart = new ApexCharts(document.querySelector("#expensesOfWeek"), options);
+  chart.render();
+</script>
 
-</html>
+{% endblock %}
+
+
+
+

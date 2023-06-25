@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}Sistema Bancario{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
+  <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='js/dashboards-analytics.js') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/egreso.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/ingreso.css') }}">
+  <link rel="stylesheet" href="../static/css/perfil.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+  
+  <!-- Agrega aquí tus enlaces CSS y scripts JS comunes -->
+</head>
+
+<body>
+  <header>
+    <h1>Sistema Bancario</h1>
+    <nav>
+      <ul>
+        <li><a onclick="window.location.href='{{ url_for('perfil') }}'">Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="menu">
+      <ul class="botones">
+        <li><a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='image/dashboard.ico') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('ingreso') }}"><img src="{{ url_for('static', filename='image/ingreso.ico') }}">Ingreso</a></li>
+        <li><a href="{{ url_for('egreso') }}"><img src="{{ url_for('static', filename='image/egreso.ico') }}">Egreso</a></li>
+        <li><a href="{{ url_for('actualizar') }}"><img src="{{ url_for('static', filename='image/actualizar.ico') }}">Actualización</a></li>
+        <li><a href="{{ url_for('logout') }}"><img src="{{ url_for('static', filename='image/salir.ico') }}">Cerrar sesión</a></li>
+      </ul>
+    </div>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+
+</html>
