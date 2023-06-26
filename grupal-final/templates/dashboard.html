@@ -3,7 +3,7 @@
 {% block title %}Dashboard - Sistema Bancario{% endblock %}
 
 {% block content %}
-<div class="col-md-6 col-lg-4 order-1 mb-4">
+<div class="col-md-2 col-lg-4 order-1 mb-2">
   <div class="card h-100">
     <div class="card-header">
   
@@ -42,37 +42,56 @@
     </div>
   </div>
 </div>
-  <div class="table">
-    <h2>Movimiento de saldos</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Fecha del movimiento</th>
-          <th>Acción</th>
-          <th>Valor</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in data %}
-        <tr>
-          <td>{{ item['date'] }}</td>
-          
-          <td>
-            {% if item['Type'] == 1 %}
-              Ingreso
-            {% elif item['Type'] == 2 %}
-              Egreso
-            {% endif %}
-          </td>
-    
-          <td>{{ item['mount'] }}</td>
-
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
+<div class="col-md-8 col-lg-6 mb-8">
+  <div class="">
+    <div class="card my-6">
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <h6 class="text-white text-capitalize ps-3">Movimientos</h6>
+        </div>
+      </div>
+      <div class="table-responsive table-container">
+        <table class="table align-items-center mb-0">
+          <thead>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha del movimiento</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Valor</th>
+              <th class="text-secondary opacity-7"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in data %}
+            <tr>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">{{ item['date'] }}</h6>
+                  </div>
+                </div>
+              </td>
+              {% if item['Type'] == 1 %}  
+              <td class="align-middle text-center text-sm">
+                <span class="badge badge-sm bg-gradient-success">Ingreso</span>
+              </td>
+              {% elif item['Type'] == 2 %}
+              <td class="align-middle text-center text-sm">
+                <span class="badge badge-sm bg-gradient-danger">Egreso</span>
+              </td>
+              {% endif %}
+              <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">{{ item['mount'] }}</span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+</div>
+
+
 
 </div>
 <script>

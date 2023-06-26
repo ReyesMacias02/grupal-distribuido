@@ -8,7 +8,7 @@ db = client.prueba
 app.secret_key = 'tu_clave_secreta'
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return sign()
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -183,6 +183,36 @@ def logout():
 def perfil():
 
        return render_template('perfil.html')
+@app.route('/sign-in')
+def sign():
+
+       return render_template('sign-in.html')
+@app.route('/sign-up',methods=['GET'])
+def sign_up():
+
+       return render_template('registro.html')
+@app.route('/sign-up',methods=['POST'])
+def sign_up_post():
+# Obtener los datos del formulario
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    dni = request.form['dni']
+    email = request.form['email']
+    direccion = request.form['direccion']
+     # Crear el campo "name" con el apellido y nombre combinados
+    name = f"{apellido} {nombre}"
+    # Crear el documento a insertar en la colección
+    cliente = {
+        'name': name,
+        'dni': dni,
+        'email': email,
+        'direccion': direccion,
+        'monto': 0
+    }
+    client = db['clientes']
+    # Insertar el documento en la colección
+    client.insert_one(cliente)
+    return sign()
 
 if __name__ == '__main__':
     app.run(debug=True)

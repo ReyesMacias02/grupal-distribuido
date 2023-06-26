@@ -1,61 +1,100 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cajero Automático</title>
-    <link rel="icon" href="{{ url_for('static', filename='image/logo.jpg') }}">
-    <style>
-        h1 {
-            text-align: center;
-        }
-    </style>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-        }
-        h1 {
-            color: #333;
-        }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Cajero Automático</h1>
-    <form action="/login" method="post">
-        <label for="cedula">Ingrese su número de cédula:</label>
-        <input type="text" id="cedula" name="cedula" required>
-        <button type="submit">Iniciar sesión</button>
-        <p>¿Aún no estas registrado? <a href="../templates/registro.html">Entra aqui</a></p>
-    </form>
-</body>
-</html>
+
+<div class="table">
+    <h2>Movimiento de saldos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha del movimiento</th>
+          <th>Acción</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+        <tr>
+          <td>{{ item['date'] }}</td>
+          
+          <td>
+            {% if item['Type'] == 1 %}
+              Ingreso
+            {% elif item['Type'] == 2 %}
+              Egreso
+            {% endif %}
+          </td>
+    
+          <td>{{ item['mount'] }}</td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+
+
+
+  <div class="">
+    <div class="">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Movimientos</h6>
+          </div>
+        </div>
+        <div class="table">
+          <div class="table">
+            <table class="">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha del movimiento</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Valor</th>
+                  <th class="text-secondary opacity-7"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in data %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                   
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{ item['date'] }}</h6>
+                   
+                      </div>
+                    </div>
+                  </td>
+               
+      
+                    {% if item['Type'] == 1 %}  
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">Ingreso</span>
+                    </td>
+                
+                    {% elif item['Type'] == 2 %}
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">Egreso</span>
+                    </td>
+                  
+                    {% endif %}
+                 
+            
+                  <td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold"> {{ item['mount'] }}</span>
+                    </td>
+                 
+        
+                </tr>
+                {% endfor %}
+  
+  
+             
+            
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
