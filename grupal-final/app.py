@@ -105,7 +105,12 @@ def ingreso():
         mount = doc.get("monto")
     print(mount)
     monto=mount
-    return render_template('ingreso.html',monto=monto)
+    if 'resultado_ingreso' in session:
+        message = session.get('resultado_ingreso')
+        session.pop('resultado_ingreso')
+    else:
+        message = "null"
+    return render_template('ingreso.html',monto=monto,message=message)
 
 @app.route('/ingreso' ,methods=['POST'])
 def guardar():
@@ -137,7 +142,8 @@ def guardar():
             session.abort_transaction()  # Hacer rollback en caso de error
             resultado = 'Error al actualizar el monto'
 
-    sessions.end_session()  
+    sessions.end_session()
+    session['resultado_ingreso'] = resultado
     return redirect(url_for('ingreso'))
 
 @app.route('/actualizar')
