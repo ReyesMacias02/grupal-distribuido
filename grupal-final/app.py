@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from datetime import datetime
 from bson import ObjectId
 app = Flask(__name__)
-client = MongoClient('mongodb://administrador:asd123@localhost:27017/?authMechanism=DEFAULT&authSource=admin')
+client = MongoClient('mongodb://administrador:asd123@server-quito,server-manta,server-guayaquil/?replicaSet=rsfacci')
 db = client.prueba
 app.secret_key = 'tu_clave_secreta'
 @app.route('/')
